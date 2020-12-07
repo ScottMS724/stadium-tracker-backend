@@ -5,12 +5,14 @@ class Api::V1::StadiumsController < ApplicationController
   def index
     @stadiums = Stadium.all
 
-    render json: @stadiums
+    render json: StadiumSerializer.new(@stadiums)
   end
 
   
   def show
     render json: @stadium
+
+    render json: StadiumSerializer.new(@stadium)
   end
 
   
