@@ -5,12 +5,14 @@ class Api::V1::VisitsController < ApplicationController
   def index
     @visits = Visit.all
 
-    render json: @visits
+    render json: VisitSerializer.new(@visits)
   end
 
   # GET /visits/1
   def show
-    render json: @visit
+    @visit = Visit.find(params[:id]) 
+
+    render json: VisitSerializer.new(@visit)
   end
 
   # POST /visits
