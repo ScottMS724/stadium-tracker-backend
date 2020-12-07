@@ -12,3 +12,6 @@ User.create(name: "adamds", username: "adamds1224@gmail.com", img_url: "https://
 
 Stadium.create(name: "Citi Field", city: "Queens, New York City", image: "https://www.ballparksofbaseball.com/wp-content/uploads/2016/03/citi17951.jpg", user_id: 1)  
 Stadium.create(name: "Citizens Bank Park", city: "Philadelphia, Pennsylvania", image: "https://dbukjj6eu5tsf.cloudfront.net/sidearm.sites/patriotleague.org/images/2019/12/6/Phillues_Citizens_Bank_Park_home_plate_M_Kennedy_VP_2200x1237.jpg", user_id: 2)
+
+Visit.create(date: "2008-07-24", description: "Fun time. Mets win 10-4.", stadium_id: 1)
+Visit.create(date: "2010-09-30", description: "Caught a fly ball!", stadium_id: 2)
