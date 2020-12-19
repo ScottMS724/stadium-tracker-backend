@@ -3,9 +3,15 @@ class Api::V1::StadiumsController < ApplicationController
 
   
   def index
-    @stadiums = Stadium.all
+    if logged_in? 
+      @stadiums = current_user.stadiums 
 
-    render json: StadiumSerializer.new(@stadiums)
+      render json: StadiumSerializer.new(@stadiums) 
+    else 
+      render json: {
+        error: "You must be logged in to see stadiums."
+      }
+    end
   end
 
   
