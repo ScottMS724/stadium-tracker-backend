@@ -16,7 +16,7 @@ class Api::V1::StadiumsController < ApplicationController
 
   
   def show
-    render json: @stadium
+    @stadium = Stadium.find(params[:id])
 
     render json: StadiumSerializer.new(@stadium)
   end
