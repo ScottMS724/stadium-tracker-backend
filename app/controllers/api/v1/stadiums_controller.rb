@@ -26,9 +26,12 @@ class Api::V1::StadiumsController < ApplicationController
     @stadium = Stadium.new(stadium_params)
 
     if @stadium.save
-      render json: @stadium, status: :created, location: @stadium
+      render json: @stadium, status: :created
     else
-      render json: @stadium.errors, status: :unprocessable_entity
+      error_resp = {
+        error: @stadium.errors.full_messages.to_sentence 
+      }
+      render json: error_resp, status: :unprocessable_entity
     end
   end
 

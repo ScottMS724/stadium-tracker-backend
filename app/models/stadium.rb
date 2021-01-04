@@ -3,5 +3,5 @@ class Stadium < ApplicationRecord
     belongs_to :user 
     has_many :visits 
     validates :name, uniqueness: true
-    validates :user, presence: true 
+    validates :user, presence: true
 end
