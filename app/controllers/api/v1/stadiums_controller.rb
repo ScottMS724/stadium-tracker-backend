@@ -26,7 +26,7 @@ class Api::V1::StadiumsController < ApplicationController
     @stadium = Stadium.new(stadium_params)
 
     if @stadium.save
-      render json: @stadium, status: :created
+      render json: StadiumSerializer.new(@stadium), status: :created
     else
       error_resp = {
         error: @stadium.errors.full_messages.to_sentence 
