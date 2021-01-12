@@ -1,5 +1,5 @@
 class Api::V1::StadiumsController < ApplicationController
-  # before_action :set_stadium, only: [:show, :update, :destroy]
+  before_action :set_stadium, only: [:show, :update, :destroy]
 
   
   def index
@@ -38,9 +38,12 @@ class Api::V1::StadiumsController < ApplicationController
 
   def update
     if @stadium.update(stadium_params)
-      render json: @stadium
+      render json: StadiumSerializer.new(@stadium), status: :ok
     else
-      render json: @stadium.errors, status: :unprocessable_entity
+      error_resp = {
+        error: @stadium.errors.full_messages.to_sentence
+      }
+      render json: error_resp, status: :unprocessable_entity
     end
   end
 
