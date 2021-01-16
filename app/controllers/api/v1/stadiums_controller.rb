@@ -23,7 +23,7 @@ class Api::V1::StadiumsController < ApplicationController
 
   
   def create
-    @stadium = Stadium.new(stadium_params)
+    @stadium = current_user.stadiums.build(stadium_params)
 
     if @stadium.save
       render json: StadiumSerializer.new(@stadium), status: :created
@@ -49,7 +49,14 @@ class Api::V1::StadiumsController < ApplicationController
 
 
   def destroy
-    @stadium.destroy
+    if @stadium.destroy
+      render json: { data: "Stadium successfully deleted." }, status: :ok 
+    else 
+      error_resp = {
+        error: "Stadium not found and not destroyed."
+      }
+      render json: error_resp, status: :unprocessable_entity 
+    end
   end
 
   private
@@ -60,6 +67,6 @@ class Api::V1::StadiumsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def stadium_params
-      params.require(:stadium).permit(:name, :city, :image, :user_id)
+      params.require(:stadium).permit(:name, :city, :image)
     end
 end
