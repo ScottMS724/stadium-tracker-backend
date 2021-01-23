@@ -3,9 +3,15 @@ class Api::V1::VisitsController < ApplicationController
 
   # GET /visits
   def index
-    @visits = Visit.all
+    if logged_in? 
+      @visits = current_user.visits 
 
-    render json: VisitSerializer.new(@visits)
+      render json: VisitSerializer.new(@visits) 
+    else 
+      render json: {
+        error: "You must be logged in to see visits."
+      }
+    end
   end
 
   # GET /visits/1
