@@ -50,7 +50,7 @@ class Api::V1::StadiumsController < ApplicationController
 
   def destroy
     if @stadium.destroy
-      render json: { data: "Stadium successfully deleted." }, status: :ok 
+      render json: { data: "Stadium successfully deleted." }, status: :ok  
     else 
       error_resp = {
         error: "Stadium not found and not destroyed."
