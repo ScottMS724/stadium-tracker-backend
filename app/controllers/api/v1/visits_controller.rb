@@ -22,13 +22,17 @@ class Api::V1::VisitsController < ApplicationController
   end
 
   # POST /visits
+
   def create
     @visit = Visit.new(visit_params)
 
     if @visit.save
-      render json: @visit, status: :created, location: @visit
+      render json: VisitSerializer.new(@visit), status: :created
     else
-      render json: @visit.errors, status: :unprocessable_entity
+      error_resp = {
+        error: @visit.errors.full_messages.to_sentence 
+      }
+      render json: error_resp, status: :unprocessable_entity
     end
   end
 
