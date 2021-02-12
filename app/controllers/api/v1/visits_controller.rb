@@ -47,7 +47,14 @@ class Api::V1::VisitsController < ApplicationController
 
   # DELETE /visits/1
   def destroy
-    @visit.destroy
+    if @visit.destroy
+      render json: { data: "Visit successfully deleted." }, status: :ok  
+    else 
+      error_resp = {
+        error: "Visit not found and not destroyed."
+      }
+      render json: error_resp, status: :unprocessable_entity 
+    end
   end
 
   private
