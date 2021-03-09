@@ -3,5 +3,5 @@ class User < ApplicationRecord
     has_many :stadiums
     has_many :visits, through: :stadiums 
     validates :username, uniqueness: true
-    validates :name, :username, :img_url, presence: true 
+    validates :name, :username, presence: true 
 end
