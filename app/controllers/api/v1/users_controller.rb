@@ -21,7 +21,7 @@ class Api::V1::UsersController < ApplicationController
         else
           resp = {
             error: @user.errors.full_messages.to_sentence
-            render json: {status: "error", code: 3000, message: "Must be a valid e-mail format."}
+            flash.alert = "Make sure e-mail is properly formatted."
           }
           render json: resp, status: :unprocessable_entity
         end
